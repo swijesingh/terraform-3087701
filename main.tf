@@ -19,6 +19,7 @@ resource "aws_instance" "web" {
   instance_type = var.instance_type
 
   tags = {
-    Name = "first"
+    Name  = "first"
+    Owner = "Sanjeewa"
   }
 }
