@@ -20,11 +20,8 @@ module "vpc" {
 }
 
 resource "aws_vpc" "dev" {
-  cidr_block       = "172.31.0.0/16"
-  instance_tenancy = "default"
-  tags = {
-    "Name" = "dev"
-  }
+  cidr_block = "172.31.0.0/16"
+
 }
 
 resource "aws_instance" "web" {
