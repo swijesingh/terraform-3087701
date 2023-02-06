@@ -23,3 +23,8 @@ resource "aws_instance" "web" {
     Owner = "Sanjeewa"
   }
 }
+
+resource "aws_instance" "myweb" {
+  ami           = "unknown"
+  instance_type = "unknown"
+}
