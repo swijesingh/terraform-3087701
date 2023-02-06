@@ -39,3 +39,12 @@ resource "aws_instance" "myweb" {
     "Terraform" = "True"
   }
 }
+
+resource "aws_vpc" "develop" {
+  cidr_block = "172.16.0.0/16"
+  tags = {
+    "Name"      = "develop"
+    "Terraform" = "True"
+  }
+
+}
