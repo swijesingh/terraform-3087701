@@ -19,11 +19,6 @@ module "vpc" {
   version = "3.19.0"
 }
 
-resource "aws_vpc" "dev" {
-  cidr_block = "172.31.0.0/16"
-
-}
-
 resource "aws_instance" "web" {
   ami           = data.aws_ami.app_ami.id
   instance_type = var.instance_type
