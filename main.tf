@@ -1,3 +1,8 @@
+module "vpc" {
+  source  = "terraform-aws-modules/vpc/aws"
+  version = "3.19.0"
+}
+
 data "aws_ami" "app_ami" {
   most_recent = true
 
@@ -14,9 +19,13 @@ data "aws_ami" "app_ami" {
   owners = ["979382823631"] # Bitnami
 }
 
-module "vpc" {
-  source  = "terraform-aws-modules/vpc/aws"
-  version = "3.19.0"
+resource "aws_vpc" "develop" {
+  cidr_block = "172.16.0.0/16"
+  tags = {
+    "Name"      = "develop"
+    "Terraform" = "True"
+  }
+
 }
 
 resource "aws_instance" "web" {
@@ -38,13 +47,4 @@ resource "aws_instance" "myweb" {
     "Name"      = "myweb"
     "Terraform" = "True"
   }
-}
-
-resource "aws_vpc" "this" {
-  cidr_block = "172.16.0.0/16"
-  tags = {
-    "Name"      = "develop"
-    "Terraform" = "True"
-  }
-
 }
