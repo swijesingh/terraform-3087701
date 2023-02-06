@@ -14,13 +14,27 @@ data "aws_ami" "app_ami" {
   owners = ["979382823631"] # Bitnami
 }
 
+module "vpc" {
+  source  = "terraform-aws-modules/vpc/aws"
+  version = "3.19.0"
+}
+
+resource "aws_vpc" "dev" {
+  cidr_block       = "172.31.0.0/16"
+  instance_tenancy = "default"
+  tags = {
+    "Name" = "dev"
+  }
+}
+
 resource "aws_instance" "web" {
   ami           = data.aws_ami.app_ami.id
   instance_type = var.instance_type
 
   tags = {
-    Name  = "first"
-    Owner = "Sanjeewa"
+    "Name"      = "first"
+    "Owner"     = "Sanjeewa"
+    "Terraform" = "True"
   }
 }
 
@@ -29,6 +43,7 @@ resource "aws_instance" "myweb" {
   instance_type = "t2.micro"
 
   tags = {
-    "Name" = "myweb"
+    "Name"      = "myweb"
+    "Terraform" = "True"
   }
 }
